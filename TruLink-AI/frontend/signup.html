@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruLink AI - Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0d0d0d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 500px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ccff;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 204, 255, 0.8);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h2 {
+            color: #00ccff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            outline: none;
+            background: transparent;
+            border-bottom: 2px solid #00ccff;
+            color: #fff;
+            transition: 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .photo-label {
+            display: block;
+            color: #00ccff;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        button {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #00ccff, #00ff99);
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.8);
+            transition: 0.4s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 153, 1);
+        }
+
+        .checker {
+            display: none;
+            margin: 20px 0;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .checker span {
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .checker.green {
+            background: #00ff99;
+        }
+
+        .checker.red {
+            background: #ff0033;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+            }
+            to {
+                text-shadow: 0 0 20px #00ff99, 0 0 30px #00ff99;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>TruLink AI Seller Signup</h2>
+    <div class="input-box">
+        <input type="text" id="username" placeholder="User Name">
+    </div>
+    <div class="input-box">
+        <input type="date" id="dob" placeholder="Date of Birth">
+    </div>
+    <div class="input-box">
+        <input type="text" id="phone" placeholder="Phone Number">
+    </div>
+    <label class="photo-label">Upload Your Photo Here</label>
+    <div class="input-box">
+        <input type="file" id="photo">
+    </div>
+    <div class="input-box">
+        <input type="text" id="company" placeholder="Company Name">
+    </div>
+    <div class="input-box">
+        <input type="text" id="cin" placeholder="Company CIN Number">
+    </div>
+    <div class="input-box">
+        <input type="text" id="aadhar" placeholder="Aadhar Card Number">
+    </div>
+    <button onclick="verifyChecker()">Verify Checker</button>
+    <div class="checker" id="checker"></div>
+</div>
+<script>
+    function verifyChecker() {
+        const score = Math.floor(Math.random() * 100) + 1;
+        const checker = document.getElementById("checker");
+        checker.style.display = "block";
+
+        if (score > 80) {
+            checker.innerHTML = `✔ Kindly Note Your ID Number: ${Math.floor(10000000 + Math.random() * 90000000)}<br>`;
+            checker.className = "checker green";
+            checker.innerHTML += `Must have One Uppercase, One Lowercase, and One Number`;
+            checker.innerHTML += `<br><input type='password' id='password' placeholder='Create Password'><br>`;
+            checker.innerHTML += `<input type='password' id='confirmPassword' placeholder='Confirm Password'><br>`;
+            checker.innerHTML += `<button onclick='createPassword()'>Create</button>`;
+        } else {
+            checker.innerHTML = `✖ Verification Failed Score: ${score}%`;
+            checker.className = "checker red";
+        }
+    }
+
+    function createPassword() {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+
+        if (!regex.test(password)) {
+            alert("Password must have one uppercase, one lowercase, and one number.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+        document.getElementById("checker").innerHTML = `ID Created and Verified Successfully!<br> Access it through Login Page.<br> Thank You.<br><button onclick="window.location.href='login.html'">Back to Login</button>`;
+    }
+</script>
+</body>
+</html>
