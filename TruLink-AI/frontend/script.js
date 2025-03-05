@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Hero Text Typing Animation
-    let text = "India's First AI + Blockchain Supply Chain Intelligence";
+    let text = ".";
     let index = 0;
     function typeWriter() {
         if (index < text.length) {
